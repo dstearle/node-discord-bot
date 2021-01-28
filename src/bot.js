@@ -14,9 +14,16 @@ client.on('ready', () => {
 });
 
 // Prints server messages to the terminal (message event)
+// client.on('message', (message) => {
+
+//     console.log(`${message.content}`);
+
+// });
+
+// Prints server messages to the terminal (message event)
 client.on('message', (message) => {
 
-    console.log(`${message.content}`);
+    console.log(`[${message.author.tag}]: ${message.content}`);
 
 });
 
