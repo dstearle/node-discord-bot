@@ -46,6 +46,41 @@ client.on('ready', () => {
 // Example Two
 
 // A list of commands to be executed on the server via a user (message event)
+// client.on('message', (message) => {
+
+//     // Prevents the bot from replying to itself
+//     if(message.author.bot === true) return;
+
+//     // If message starts with a command prefix (in this case "$") commit the command
+//     if(message.content.startsWith(PREFIX)) {
+
+//         // Allows for multiple commands separated by white space
+//         const [CMD_NAME, ...args] = message.content
+//             .trim()
+//             .substring(PREFIX.length)
+//             .split(/\s+/);
+
+//         // The $sneed command
+//         if(CMD_NAME === 'sneed') {
+
+//             message.channel.send('SNEEDS FEED & SEED');
+
+//         }
+
+//         // The $chuck command
+//         else if(CMD_NAME === 'chuck') {
+
+//             message.channel.send('CHUCKS FUCK & SUCK');
+
+//         }
+
+//     }
+
+// });
+
+// Example Three
+
+// A kick user command (message event)
 client.on('message', (message) => {
 
     // Prevents the bot from replying to itself
@@ -60,17 +95,27 @@ client.on('message', (message) => {
             .substring(PREFIX.length)
             .split(/\s+/);
 
-        // The $sneed command
-        if(CMD_NAME === 'sneed') {
+        // The $formerly command
+        if(CMD_NAME === 'formerly') {
 
-            message.channel.send('SNEEDS FEED & SEED');
+            // If user does not provide args to the command inform error
+            if(args.length === 0) return message.reply('Please provide an user ID!');
 
-        }
+            // The ID of the member to be formerly'd
+            const member = message.guild.members.cache.get(args[0]);
 
-        // The $chuck command
-        else if(CMD_NAME === 'chuck') {
+            // If member is part of group kick them
+            if(member) {
 
-            message.channel.send('CHUCKS FUCK & SUCK');
+                member.kick();
+
+            }
+
+            else {
+
+                message.channel.send('That member was not found!');
+
+            }
 
         }
 
