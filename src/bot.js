@@ -20,10 +20,18 @@ client.on('ready', () => {
 
 // });
 
-// Prints server messages to the terminal (message event)
+// Replies to friendly users (message event)
 client.on('message', (message) => {
 
+    // Prints server messages with user tag to the terminal
     console.log(`[${message.author.tag}]: ${message.content}`);
+
+    // If anyone on the server says the following greetings have the bot say hi back
+    if(message.content === 'hello' || 'hi' || 'bonjour' || 'guttentag' || 'buenos dias') {
+
+        message.reply('Hello there :) !');
+
+    }
 
 });
 
