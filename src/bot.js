@@ -81,7 +81,7 @@ client.on('ready', () => {
 // Example Three
 
 // A kick user command (message event)
-client.on('message', (message) => {
+client.on('message', async (message) => {
 
     // Prevents the bot from replying to itself
     if(message.author.bot === true) return;
@@ -98,6 +98,9 @@ client.on('message', (message) => {
         // The $formerly command
         if(CMD_NAME === 'formerly') {
 
+            // Checks to see if user has permission to kick members
+            if(!message.member.hasPermission('KICK_MEMBERS')) return message.reply('Looks like you dont have that BDE fam!');
+
             // If user does not provide args to the command inform error
             if(args.length === 0) return message.reply('Please provide an user ID!');
 
@@ -107,16 +110,46 @@ client.on('message', (message) => {
             // If member is part of group kick them
             if(member) {
 
-                member.kick();
+                member.kick()
+                .then((member) => message.channel.send(`formerly ${member}.`))
+                .catch((err) => message.channel.send("A BLOO BLOO! No permissions for you :'( !"));
 
             }
 
+            // Inform user that said user is not in the server
             else {
 
                 message.channel.send('That member was not found!');
 
             }
 
+        }
+
+        // Checks to see if user has ability to ban others
+        else if(CMD_NAME === 'b&') {
+
+            // Checks to see if user has permission to kick members
+            if(!message.member.hasPermission('BAN_MEMBERS')) return message.reply('Looks like you dont have that BDE fam!');
+
+            // If user does not provide args to the command inform error
+            if(args.length === 0) return message.reply('Please provide an user ID!');
+
+            // Bans the user from the server
+            try {
+
+                const user = await message.guild.members.ban(args[0]);
+                message.channel.send('User was B& successfully!');
+
+            }
+
+            // If an error occurs give report
+            catch(err) {
+
+                console.log(err);
+                message.channel.send('That member was not found!');
+
+            }
+                
         }
 
     }
