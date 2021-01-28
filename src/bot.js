@@ -23,11 +23,14 @@ client.on('ready', () => {
 // Replies to friendly users (message event)
 client.on('message', (message) => {
 
+    // Prevents the bot from replying to itself
+    if(message.author.bot === true) return;
+
     // Prints server messages with user tag to the terminal
     console.log(`[${message.author.tag}]: ${message.content}`);
 
     // If anyone on the server says the following greetings have the bot say hi back
-    if(message.content === 'hello' || 'hi' || 'bonjour' || 'guttentag' || 'buenos dias') {
+    if(message.content === 'hello' || 'hi' || 'bonjour' || 'guttentag' || 'hola') {
 
         message.reply('Hello there :) !');
 
