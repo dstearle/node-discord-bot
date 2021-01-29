@@ -2,12 +2,20 @@
 require('dotenv').config();
 
 // Retrieves class 'Client' from discord
-const { Client } = require('discord.js');
+const { Client, WebhookClient } = require('discord.js');
+
 // New instance of 'Client' class
 const client = new Client({
     partials: ['MESSAGE', 'REACTION']
 });
 
+// New instance for webhook client
+const webhookClient = new WebhookClient(
+    process.env.WEBHOOK_ID,
+    process.env.WEBHOOK_TOKEN,
+);
+
+// Used for discord commands
 const PREFIX = "$";
 
 // Informs terminal that the bot has logged in successfully (ready event)
