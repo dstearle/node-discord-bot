@@ -174,11 +174,11 @@ client.on('messageReactionAdd', (reaction, user) => {
 
             // Farmers role
             case '🚜':
-                member.rules.add('804498108511551548');
+                member.roles.add('804498108511551548');
                 break;
             // City Slickers role
             case '🏙️':
-                member.rules.add('804498332935782401');
+                member.roles.add('804498332935782401');
                 break;
 
         }
