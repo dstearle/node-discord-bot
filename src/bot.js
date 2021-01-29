@@ -162,6 +162,17 @@ client.on('message', async (message) => {
                 
         }
 
+        // If the 'announce' command is used
+        else if(CMD_NAME === 'announce') {
+
+            // Allows for messages to be sent
+            const msg = args.join(' ');
+
+            // Sends the webhook
+            webhookClient.send(msg);
+
+        }
+
     }
 
 });
