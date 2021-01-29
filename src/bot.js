@@ -156,5 +156,34 @@ client.on('message', async (message) => {
 
 });
 
+// A discord reaction (message event)
+client.on('messageReactionAdd', (reaction, user) => {
+
+    // Emoji names
+    const { name } = reaction.emoji;
+
+    // Member instance
+    const member = reaction.message.guild.members.cache.get(user.id);
+
+    // Reaction message
+    if(reaction.message.id === '804498618714423346') {
+
+        switch(name) {
+
+            // Farmers role
+            case '🚜':
+                member.rules.add('804498108511551548');
+                break;
+            // City Slickers role
+            case '🏙️':
+                member.rules.add('804498332935782401');
+                break;
+
+        }
+
+    }
+
+});
+
 // Login for the discord bot
 client.login(process.env.DISCORDJS_BOT_TOKEN)
