@@ -4,7 +4,9 @@ require('dotenv').config();
 // Retrieves class 'Client' from discord
 const { Client } = require('discord.js');
 // New instance of 'Client' class
-const client = new Client();
+const client = new Client({
+    partials: ['MESSAGE', 'REACTION']
+});
 
 const PREFIX = "$";
 
